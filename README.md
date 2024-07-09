@@ -4,7 +4,7 @@
 
 Learn how to run [GraphRAG](https://www.microsoft.com/en-us/research/blog/graphrag-unlocking-llm-discovery-on-narrative-private-data/) pipelines backed by [Amazon Bedrock](https://aws.amazon.com/bedrock/) using [LiteLLM proxy](https://litellm.vercel.app/docs/simple_proxy).
 
-![](merged_graph.png)
+![](images/merged_graph.png)
 
 ## Steps
 
