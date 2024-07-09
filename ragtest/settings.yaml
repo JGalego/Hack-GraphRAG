@@ -1,0 +1,93 @@
+encoding_model: cl100k_base
+skip_workflows: []
+llm:
+  api_key: ${GRAPHRAG_API_KEY}
+  type: openai_chat
+  model: ${GRAPHRAG_CHAT_MODEL}
+  model_supports_json: true
+  api_base: ${OPENAI_BASE_URL}
+
+parallelization:
+  stagger: 0.3
+
+async_mode: threaded
+
+embeddings:
+  async_mode: threaded
+  llm:
+    api_key: ${GRAPHRAG_API_KEY}
+    type: openai_embedding
+    model: ${GRAPHRAG_EMBEDDINGS_MODEL}
+    api_base: ${OPENAI_BASE_URL}
+
+chunks:
+  size: 300
+  overlap: 100
+  group_by_columns: [id]
+    
+input:
+  type: file
+  file_type: text
+  base_dir: "input"
+  file_encoding: utf-8
+  file_pattern: ".*\\.txt$"
+
+cache:
+  type: file
+  base_dir: "cache"
+
+storage:
+  type: file
+  base_dir: "output/${timestamp}/artifacts"
+
+reporting:
+  type: file
+  base_dir: "output/${timestamp}/reports"
+
+entity_extraction:
+  prompt: "prompts/entity_extraction.txt"
+  entity_types: [organization,person,geo,event]
+  max_gleanings: 0
+
+summarize_descriptions:
+  prompt: "prompts/summarize_descriptions.txt"
+  max_length: 500
+
+claim_extraction:
+  prompt: "prompts/claim_extraction.txt"
+  description: "Any claims or facts that could be relevant to information discovery."
+  max_gleanings: 0
+
+community_report:
+  prompt: "prompts/community_report.txt"
+  max_length: 2000
+  max_input_length: 8000
+
+cluster_graph:
+  max_cluster_size: 10
+
+embed_graph:
+  enabled: false
+
+umap:
+  enabled: false  # true --> bug!
+
+snapshots:
+  graphml: true
+  raw_entities: false
+  top_level_nodes: false
+
+local_search:
+  # text_unit_prop: 0.5
+  # community_prop: 0.1
+  # conversation_history_max_turns: 5
+  # top_k_mapped_entities: 10
+  # top_k_relationships: 10
+  # max_tokens: 12000
+
+global_search:
+  # max_tokens: 12000
+  # data_max_tokens: 12000
+  # map_max_tokens: 1000
+  # reduce_max_tokens: 2000
+  # concurrency: 32

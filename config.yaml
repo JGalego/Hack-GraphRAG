@@ -1,0 +1,19 @@
+# Adapted from https://litellm.vercel.app/docs/proxy/configs
+
+model_list:
+  - model_name: anthropic-claude-3-sonnet
+    litellm_params: 
+      model: bedrock/anthropic.claude-3-sonnet-20240229-v1:0
+      aws_region_name: us-east-1
+      temperature: 0.0
+  - model_name: amazon-titan-embed
+    litellm_params: 
+      model: bedrock/amazon.titan-embed-text-v2:0
+      aws_region_name: us-east-1
+
+litellm_settings:
+  drop_params: True
+
+general_settings: 
+  master_key: correct-horse-battery-staple
+  # Did you get that reference? ☝️
